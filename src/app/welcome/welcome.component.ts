@@ -9,6 +9,7 @@ import { WelcomeDataService } from './../service/data/welcome-data.service';
 export class WelcomeComponent {
   message = 'Some welcome msg';
   name = '';
+  welcomeMsgFromService:any;
   // welcomeMsgFromService:string
   constructor(
     private route: ActivatedRoute,
@@ -25,12 +26,22 @@ export class WelcomeComponent {
   getWelcomeMessage() {
     console.log(this.service.executeHelloWorldBeanService());
     this.service.executeHelloWorldBeanService().subscribe(
-      response=>this.handleSuccessfulResponse(response)
+      response=>this.handleSuccessfulResponse(response),
+      error=>this.handleErrorResponse(error)
     );
+
+    console.log("last-lne")
   }
 
   handleSuccessfulResponse(response:any){
-    console.log(response)
-    console.log(response.message)
+    this.welcomeMsgFromService=response.message;
+    // console.log(response)
+    // console.log(response.message)
+  }
+
+  handleErrorResponse(error:any){
+    // console.log(error)
+    this.welcomeMsgFromService=error.error.message
+
   }
 }
