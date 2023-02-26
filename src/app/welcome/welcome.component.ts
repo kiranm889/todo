@@ -44,4 +44,15 @@ export class WelcomeComponent {
     this.welcomeMsgFromService=error.error.message
 
   }
+
+  //SecondUrl
+  getWelcomeMessageWithParameter() {
+    console.log(this.service.executeHelloWorldServiceWithPathVariable(this.name));
+    this.service.executeHelloWorldServiceWithPathVariable(this.name).subscribe(
+      response=>this.handleSuccessfulResponse(response),
+      error=>this.handleErrorResponse(error)
+    );
+
+    console.log("last-lne")
+  }
 }
